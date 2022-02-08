@@ -7,11 +7,11 @@ import store.implementasi.unit.test.entity.Total;
 import java.util.*;
 
 public class StoreRepositoryImpl implements StoreRepository{
-    SortedSet<Name> productName = new TreeSet<>();
+    ArrayList<Name> productName = new ArrayList<>();
     Map<Name, Price> productPrice = new HashMap<>();
     Map<Name, Total> productTotal = new HashMap<>();
     @Override
-    public SortedSet<Name> getAllProduct() {
+    public ArrayList<Name> getAllProduct() {
         return productName;
     }
 

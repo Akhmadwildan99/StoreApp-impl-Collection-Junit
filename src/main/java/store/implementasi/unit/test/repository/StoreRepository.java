@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.SortedSet;
 
 public interface StoreRepository {
-    SortedSet<Name> getAllProduct();
+    ArrayList<Name> getAllProduct();
     Map<Name, Price> getAllPrice();
     Map<Name, Total> getAllTotal();
 
