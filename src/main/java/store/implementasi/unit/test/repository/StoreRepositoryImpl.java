@@ -28,25 +28,25 @@ public class StoreRepositoryImpl implements StoreRepository{
     @Override
     public void add(Name name, Price price, Total total) {
         if (name != null && price != null && total != null){
+            updateTotal(name, price, total);
             if (!productName.contains(name)){
                 productName.add(name);
                 productPrice.put(name, price);
                 productTotal.put(name, total);
-
             }
-            updateTotal(name, price, total);
         }
     }
 
     public void updateTotal(Name name, Price price, Total total) {
-        if (productName.contains(name) && productPrice.containsKey(name)){
+        var priceCurrent = productPrice.get(name);
+        if (productName.contains(name) && price.equals(priceCurrent)){
             Total current = productTotal.get(name);
             Integer currentTotal = current.getTotal();
             Integer secondTotal = total.getTotal();
             Integer last = currentTotal + secondTotal;
             Total lastTotal = new Total(last);
             productTotal.replace(name, current, lastTotal);
-            System.out.println("Total diupdate jadi " + lastTotal.getTotal());
+            System.out.println("Total "+ name.getName() + " diupdate jadi " + lastTotal.getTotal());
         }
     }
 

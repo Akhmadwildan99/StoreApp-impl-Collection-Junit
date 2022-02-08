@@ -26,7 +26,7 @@ public class StoreServiceImpl implements StoreService{
             var name = productName.get(i);
             var price = productPrice.get(name);
             var total = productTotal.get(name);
-            System.out.println(no + ". " + name.getName() + " harga: " + price.getPrice() + " total: " + total.getTotal()
+            System.out.println(no + ". " + name.getName() + " || harga: " + price.getPrice() + " || total: " + total.getTotal()
             );
         }
      }
