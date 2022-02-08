@@ -46,6 +46,7 @@ public class StoreRepositoryImpl implements StoreRepository{
             Integer last = currentTotal + secondTotal;
             Total lastTotal = new Total(last);
             productTotal.replace(name, current, lastTotal);
+            System.out.println("Total diupdate jadi " + lastTotal.getTotal());
         }
     }
 

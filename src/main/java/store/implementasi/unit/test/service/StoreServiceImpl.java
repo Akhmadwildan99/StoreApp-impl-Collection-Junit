@@ -7,7 +7,6 @@ import store.implementasi.unit.test.repository.StoreRepository;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.SortedSet;
 
 public class StoreServiceImpl implements StoreService{
     private StoreRepository storeRepository;
@@ -33,17 +32,23 @@ public class StoreServiceImpl implements StoreService{
      }
 
     @Override
-    public void addProduct() {
+    public void addProduct(String name, Integer price, Integer total) {
+        Name productName = new Name(name);
+        Price productPrice = new Price(price);
+        Total productTotal = new Total(total);
+
+        storeRepository.add(productName, productPrice, productTotal);
 
     }
 
     @Override
-    public void checkOut1() {
+    public void checkOut1(String name, Integer price) {
 
     }
 
     @Override
-    public void checkOut2() {
+    public void checkOut2(String name, Integer total) {
 
     }
+
 }

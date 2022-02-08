@@ -1,9 +1,10 @@
-package store.implementasi.unit.test.mock;
+package store.implementasi.unit.test.mock.serviceTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import store.implementasi.unit.test.entity.Name;
 import store.implementasi.unit.test.entity.Price;
 import store.implementasi.unit.test.entity.Total;
@@ -25,5 +26,6 @@ public class StoreServiceTest {
 
     @Test
     void testAddService() {
+
     }
 }
