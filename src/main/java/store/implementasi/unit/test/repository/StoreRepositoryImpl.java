@@ -52,6 +52,29 @@ public class StoreRepositoryImpl implements StoreRepository{
 
     @Override
     public boolean out(Name name, Price price) {
+        var priceContains = productPrice.get(name).getPrice();
+        var priceCurrent = price.getPrice();
+        var totalCurrentInteger = productTotal.get(name).getTotal();
+        var totalCurrent = productTotal.get(name);
+        if (productName.contains(name) && priceCurrent >= priceContains){
+            Integer checkOutProduct = 0;
+            while (priceCurrent >= priceContains){
+                checkOutProduct += 1;
+                priceCurrent-= priceContains;
+            }
+            Integer lastTotal = totalCurrentInteger - checkOutProduct;
+            Total total = new Total(lastTotal);
+            if (total.getTotal().equals(0)){
+                productName.remove(name);
+                productPrice.remove(name);
+                productTotal.remove(name);
+            } else {
+                productTotal.replace(name, totalCurrent, total);
+                System.out.println("Kembalian anda " + priceCurrent);
+                System.out.println("Total diupdate menjadi " + productTotal.get(name).getTotal());
+            }
+            return true;
+        }
         return false;
     }
 
