@@ -57,14 +57,10 @@ public class StoreRepositoryImpl implements StoreRepository{
         var totalCurrentInteger = productTotal.get(name).getTotal();
         var totalCurrent = productTotal.get(name);
         if (productName.contains(name) && priceCurrent >= priceContains){
-            Integer checkOutProduct = 0;
-            while (priceCurrent >= priceContains){
-                checkOutProduct += 1;
-                priceCurrent-= priceContains;
-            }
-            Integer lastTotal = totalCurrentInteger - checkOutProduct;
-            Total total = new Total(lastTotal);
-            if (total.getTotal().equals(0)){
+            Total total = updateTotalCheckOut(priceCurrent, priceContains, totalCurrentInteger);
+            if(total.getTotal() < 0){
+                return false;
+            } else if (total.getTotal().equals(0)){
                 productName.remove(name);
                 productPrice.remove(name);
                 productTotal.remove(name);
@@ -78,8 +74,37 @@ public class StoreRepositoryImpl implements StoreRepository{
         return false;
     }
 
+    public Total updateTotalCheckOut(Integer priceOffered, Integer priceContain, Integer totalCurrentInteger){
+        Integer checkOutProduct = 0;
+        while (priceOffered >= priceContain){
+            checkOutProduct += 1;
+            priceOffered-= priceContain;
+        }
+        Integer lastTotal = totalCurrentInteger - checkOutProduct;
+        Total total = new Total(lastTotal);
+        return total;
+    }
+
     @Override
     public boolean out2(Name name, Total total) {
+        var totalCurrent = productTotal.get(name);
+        var totalOffered = total.getTotal();
+        var totalContain = productTotal.get(name).getTotal();
+        var price = productPrice.get(name).getPrice();
+        if (productName.contains(name) && totalOffered <= totalContain){
+            var paid = totalOffered * price;
+            var remainingTotal = totalContain - totalOffered;
+            Total lastTotal = new Total(remainingTotal);
+            if (lastTotal.getTotal().equals(0)){
+                productName.remove(name);
+                productPrice.remove(name);
+                productTotal.remove(name);
+            } else{
+                productTotal.replace(name, totalCurrent, lastTotal);
+            }
+            System.out.println("RP." + paid + " harga yang harus anda bayar!");
+            return true;
+        }
         return false;
     }
 }
