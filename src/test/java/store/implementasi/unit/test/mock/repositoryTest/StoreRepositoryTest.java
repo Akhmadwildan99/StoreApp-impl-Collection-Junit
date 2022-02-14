@@ -1,4 +1,4 @@
-package store.implementasi.unit.test.mock.serviceTest;
+package store.implementasi.unit.test.mock.repositoryTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import store.implementasi.unit.test.entity.Name;
 import store.implementasi.unit.test.entity.Price;
@@ -88,13 +87,14 @@ public class StoreRepositoryTest {
     void testOut2RepositoryFailed() {
         storeRepository.add(new Name("Nescafe"), new Price(4000), new Total(50));
         storeRepository.add(new Name("Kapalapi"), new Price(2000), new Total(40));
-        boolean nescafe = storeRepository.out2(new Name("Nescafe"), new Total(51));
-        boolean kapalapi = storeRepository.out2(new Name("Kapalapi"), new Total(41));
+        boolean nescafe = storeRepository.out2(new Name("Nescafe"), new Total(57));
+        boolean kapalapi = storeRepository.out2(new Name("Kapalapi"), new Total(49));
         Assertions.assertEquals(false, nescafe);
         Assertions.assertEquals(50, storeRepository.getAllTotal().get(new Name("Nescafe")).getTotal());
         Assertions.assertEquals(false, kapalapi);
         Assertions.assertEquals(40, storeRepository.getAllTotal().get(new Name("Kapalapi")).getTotal());
 
-
     }
+
+
 }

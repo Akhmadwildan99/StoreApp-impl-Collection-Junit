@@ -43,12 +43,26 @@ public class StoreServiceImpl implements StoreService{
 
     @Override
     public void checkOut1(String name, Integer price) {
-
+        Name product = new Name(name);
+        Price price1 = new Price(price);
+        boolean out = storeRepository.out(product, price1);
+        if (out){
+            System.out.println("PROSES BERHASIL");
+        } else {
+            System.out.println("PROSES GAGAL");
+        }
     }
 
     @Override
     public void checkOut2(String name, Integer total) {
-
+        Name product = new Name(name);
+        Total toral1 = new Total(total);
+        boolean out2 = storeRepository.out2(product, toral1);
+        if (out2){
+            System.out.println("PROSES BERHASIL");
+        } else {
+            System.out.println("PROSES GAGAL");
+        }
     }
 
 }

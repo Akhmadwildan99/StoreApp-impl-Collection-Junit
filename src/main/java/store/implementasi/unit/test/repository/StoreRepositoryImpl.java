@@ -66,7 +66,6 @@ public class StoreRepositoryImpl implements StoreRepository{
                 productTotal.remove(name);
             } else {
                 productTotal.replace(name, totalCurrent, total);
-                System.out.println("Kembalian anda " + priceCurrent);
                 System.out.println("Total diupdate menjadi " + productTotal.get(name).getTotal());
             }
             return true;
@@ -81,6 +80,9 @@ public class StoreRepositoryImpl implements StoreRepository{
             priceOffered-= priceContain;
         }
         Integer lastTotal = totalCurrentInteger - checkOutProduct;
+        if (!priceOffered.equals(0)){
+            System.out.println("Kembalian anda " + priceOffered);
+        }
         Total total = new Total(lastTotal);
         return total;
     }
